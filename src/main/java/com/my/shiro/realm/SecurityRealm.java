@@ -45,12 +45,14 @@ public class SecurityRealm extends AuthorizingRealm {
 		// 为当前用户设置角色和权限
 		SimpleAuthorizationInfo simpleAuthorInfo = null;
 		// 获取当前登录的用户名
-		String currentUsername = (String) super
+		/*String currentUsername = (String) super
+				.getAvailablePrincipal(principals);*/
+		User user = (User) super
 				.getAvailablePrincipal(principals);
 		List<String> roleList = new ArrayList<String>();
 		List<String> permissionList = new ArrayList<String>();
 
-		User user = userService.getByUserName(currentUsername);
+		//User user = userService.getByUserName(currentUsername);
 		if (null != user) {
 			// 实体类User中包含有用户角色的实体类信息
 			if (null != user.getRoles() && user.getRoles().size() > 0) {
@@ -89,7 +91,7 @@ public class SecurityRealm extends AuthorizingRealm {
 						ToStringStyle.MULTI_LINE_STYLE));
 		User user = userService.getByUserName(token.getUsername());
 		if (null != user) {
-			authcInfo = new SimpleAuthenticationInfo(user.getUserName(),
+			authcInfo = new SimpleAuthenticationInfo(user,
 					user.getPassword(), user.getNickName());
 			this.setSession("currentUser", user);
 		}
