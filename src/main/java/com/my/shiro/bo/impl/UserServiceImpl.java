@@ -3,14 +3,14 @@ package com.my.shiro.bo.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.my.shiro.bo.UserService;
 import com.my.shiro.entity.Permission;
 import com.my.shiro.entity.Role;
 import com.my.shiro.entity.User;
 
-@Component
+@Service
 public class UserServiceImpl implements UserService {
 
 	public User getByUserName(String userName) {

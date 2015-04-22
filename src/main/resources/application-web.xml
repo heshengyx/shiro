@@ -9,7 +9,21 @@
   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	
 	<!-- 自动扫描dao和service包(自动注入) -->
-	<context:component-scan base-package="com.my.shiro.dao.impl,com.my.shiro.bo.impl,com.my.shiro.realm" />
+	<context:component-scan base-package="com.my.shiro.dao.impl,com.my.shiro.bo.impl,com.my.shiro.realm,com.my.aop.advice" />
 	
+	<!--
+	<bean id="beforeAdvice" class="com.my.aop.advice.BeforeAdvice" />
 	
+	<aop:config>
+	    <aop:aspect ref="beforeAdvice">
+	    <aop:before method="beforeSleep" pointcut="execution(* *.sleep(..))"/>
+	    </aop:aspect>
+	</aop:config>-->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<!--
+	<bean id="advisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+    	<property name="advice" ref="beforeAdvice"/>
+    	<property name="pattern" value="com.my.shiro.bo.*"/>
+  	</bean>
+  	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>-->
 </beans>
